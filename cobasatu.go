@@ -19,7 +19,7 @@ func main() {
 		fmt.Println("3. Keluar")
 		fmt.Print("Pilih opsi = ")
 		fmt.Scan(&pilihan)
-		fmt.Scanln() // bersihkan input
+		fmt.Scanln()
 
 		if pilihan == 1 {
 
@@ -148,3 +148,4 @@ func main() {
 		}
 	}
 }
+
