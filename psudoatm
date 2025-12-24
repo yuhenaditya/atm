@@ -1,0 +1,144 @@
+program ATM_Bank_VINESHYT
+
+kamus
+pilihan, pilihan2        : integer
+saldo, jumlah            : integer
+pin, masukPIN            : integer
+pinBaru, pinLama         : integer
+nama, masukNama          : string
+namaBaru                 : string
+loop, menuATM            : boolean
+
+algoritma
+loop ← true
+menuATM ← false
+nama ← ""
+saldo ← 0
+
+output("\n=== Selamat Datang Di Bank VINESHYT ===")
+
+while loop = true do
+
+    output("\n1. Buat kartu")
+    output("2. Masuk kartu")
+    output("3. Keluar")
+    output("Pilih opsi = ")
+    input(pilihan)
+
+    if pilihan = 1 then
+
+        output("Buat Nama = ")
+        input(namaBaru)
+
+        output("Masukkan PIN (100000 - 999999) = ")
+        input(pinBaru)
+
+        if pinBaru ≥ 100000 and pinBaru ≤ 999999 then
+
+            if nama = "" then
+                nama ← namaBaru
+                pin ← pinBaru
+                saldo ← 0
+                output("\n=== Berhasil Membuat Kartu ===")
+
+            else if namaBaru = nama then
+                output("!!! Kartu sudah terdaftar !!!")
+
+            else
+                output("!!! ATM ini hanya mendukung satu kartu !!!")
+            endif
+
+        else
+            output("PIN harus 6 digit angka dan tidak boleh diawali 0")
+        endif
+
+    else if pilihan = 2 then
+
+        output("Nama = ")
+        input(masukNama)
+
+        output("Masukkan PIN = ")
+        input(masukPIN)
+
+        if masukNama = nama and masukPIN = pin and nama ≠ "" then
+
+            output("\n=== Login Berhasil ===")
+            menuATM ← true
+
+            while menuATM = true do
+
+                output("\n1. Setor tunai")
+                output("2. Tarik tunai")
+                output("3. Cek saldo")
+                output("4. Ganti PIN")
+                output("5. Keluar akun")
+                output("Pilih transaksi = ")
+                input(pilihan2)
+
+                if pilihan2 = 1 then
+                    output("Jumlah setor = ")
+                    input(jumlah)
+
+                    if jumlah > 0 then
+                        saldo ← saldo + jumlah
+                        output("Saldo = ", saldo)
+                    else
+                        output("Jumlah tidak valid")
+                    endif
+
+                else if pilihan2 = 2 then
+                    output("Jumlah tarik = ")
+                    input(jumlah)
+
+                    if jumlah > 0 and jumlah ≤ saldo then
+                        saldo ← saldo - jumlah
+                        output("Saldo = ", saldo)
+                    else
+                        output("Saldo tidak cukup")
+                    endif
+
+                else if pilihan2 = 3 then
+                    output("Saldo saat ini = ", saldo)
+
+                else if pilihan2 = 4 then
+
+                    output("Masukkan PIN lama = ")
+                    input(pinLama)
+
+                    if pinLama = pin then
+
+                        output("Masukkan PIN baru = ")
+                        input(pinBaru)
+
+                        if pinBaru ≥ 100000 and pinBaru ≤ 999999 then
+                            pin ← pinBaru
+                            output("PIN berhasil diubah")
+                        else
+                            output("PIN harus 6 digit angka dan tidak boleh diawali 0")
+                        endif
+
+                    else
+                        output("PIN lama salah")
+                    endif
+
+                else if pilihan2 = 5 then
+                    output("Berhasil keluar dari akun")
+                    menuATM ← false
+                else
+                    output("Pilih sesuai menu")
+                endif
+
+            endwhile
+
+        else
+            output("Nama atau PIN salah")
+        endif
+
+    else if pilihan = 3 then
+        output("Terima kasih telah menggunakan ATM")
+        loop ← false
+    else
+        output("Pilih sesuai menu")
+    endif
+
+endwhile
